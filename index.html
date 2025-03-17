@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Basic Web Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button {
+            width: auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Web Page</h1>
+    <p>This is a basic web page created as a demonstration.</p>
+    
+    <h2>Html lists</h2>
+    <h3>Unordered List</h3>
+    <ul type="disc">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <h3>Ordered List</h3>
+    <ol type="i" start="10">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ol>
+    <h3>Definition List</h3>
+    <dl>
+        <dt>FBI</dt>
+        <dd>Federal Bureau of Investigation</dd>
+        <dt>CIA</dt>
+        <dd>Central Intelligence Agency</dd>
+        <dt>NSA</dt>
+        <dd>National Security Agency</dd>
+    </dl>
+    <h2>Html Images</h2>
+    <img src="../Downloads/home.jpg" alt="Image 1" width="600" height="600">
+    <img src="https://images.pexels.com/photos/897712/pexels-photo-897712.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"   alt="Beautiful Nature" 
+    width="600">
+
+    <h2>User Registration Form</h2>
+    <form>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Select Your Country:</label>
+            <select id="country" name="country" required>
+                <option value="usa">USA</option>
+                <option value="canada">Canada</option>
+                <option value="uk">UK</option>
+                <option value="australia">Australia</option>
+            </select>
+        </div>
+        <button type="submit">Register</button>
+        <button type="button" onclick="window.location.reload();">Cancel</button>
+    </form>
+</body>
+</html>
