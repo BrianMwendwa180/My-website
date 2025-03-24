@@ -1,0 +1,47 @@
+CSS -Cascading Stlylesheets
+
+selector
+declaration block => property-value pairs
+
+p {
+    property: value;
+    property: value;
+    property: values    
+}
+
+property -what you want to Stlylesheets
+value - what you want to Style
+
+p {
+    color: blue;
+    font: 20px
+}
+
+Selector => way of targeting html elements to style
+
+1. universal selector (*) -elements of all type
+* {.....}
+2. element Selector
+form {....}
+ul {....}
+table {...}
+3. id selector (#)- elements of a specific type
+<img id="cover-image" src="" alt="">
+#cover -image{...}
+
+4. class Selector
+<div class ="main-layout"></div>
+<section class ="main-layout"></section>
+.main-layout {....}
+
+5.group selector
+a,p.h1.h2,h3 {....}
+
+margin -space outside an elements border: betweeen the border and other elements
+padding -space inside an element; between the border and the elements content1. Single
+margin; 10px; => all round the element
+
+2. double
+padding: 10px 15px -> top+bottom, <left>
+    3. four
+margin: 0 20px 10px;->top,right,right

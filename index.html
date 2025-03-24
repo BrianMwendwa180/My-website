@@ -3,33 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Basic Web Page</title>
+    <title>Welcome to Brian Codes</title>
+    <!--2. Internal styling/css-->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+
+        h2 {
+            text-decoration: underline;
+            text-align: center;
+        
         }
-        .form-group {
-            margin-bottom: 15px;
+        #p-main {
+            color: red;
+            font-size: 20px;
+            font-style: italic;
         }
-        label {
+
+        img {
             display: block;
-            margin-bottom: 5px;
+            border: 3px solid white;
+            border-radius: 5px;
+            margin: 100px;
+            padding: 50px;
         }
-        input, select, button {
-            width: 100%;
+        
+        .google-link {
+            
+            color: yellowgreen;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
             padding: 10px;
-            margin-top: 5px;
-        }
-        button {
-            width: auto;
-            display: inline-block;
+            cursor: pointer;
         }
     </style>
-</head>
-<body>
-    <h1>Welcome to My Web Page</h1>
-    <p>This is a basic web page created as a demonstration.</p>
+
+    </head>
+<!--1. in-line styling-->
+<body style="background-color: blue">
+    <h1>Welcome to Brian Codes</h1>
+    <h2>New Section Heading</h2>
+    <p id="p-main">This is a new paragraph added to the page.</p>
     
     <h2>Html lists</h2>
     <h3>Unordered List</h3>
@@ -57,6 +70,8 @@
     <img src="../Downloads/home.jpg" alt="Image 1" width="600" height="600">
     <img src="https://images.pexels.com/photos/897712/pexels-photo-897712.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"   alt="Beautiful Nature" 
     width="600">
+    
+    <a class= "google-link" href="https://www.google.com" >Visit Google</a>
 
     <h2>User Registration Form</h2>
     <form>

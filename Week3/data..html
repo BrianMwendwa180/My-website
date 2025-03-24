@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="Week3/Styles/style.css">
+    
+    <!-- Internal CSS (For Quick Testing) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Data Table</h1>
+    
+    <table class="tbl-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>john@example.com</td>
+                <td>(123) 456-7890</td>
+                <td>New York</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>jane@example.com</td>
+                <td>(987) 654-3210</td>
+                <td>Los Angeles</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer class="footer">
+        &copy; 2025 My Website. All rights reserved.
+    </footer>
+
+</body>
+</html>
