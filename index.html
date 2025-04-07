@@ -24,6 +24,8 @@
             border-radius: 5px;
             margin: 100px;
             padding: 50px;
+            width: 100%;
+            height: auto;
         }
         
         .google-link {
@@ -35,9 +37,80 @@
             padding: 10px;
             cursor: pointer;
         }
+        .container {
+            width: 80%;
+            height: auto;
+            background-color: lightblue;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                height: auto;
+                background-color: lightgreen;
+                margin: 0;
+
+            }
+            img {
+                display: none;
+            }
+        }
+         body {
+            font: size 1.5em;
+         }
+         .flex-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: lightgray;
+            padding: 20px;
+            flex-wrap: wrap;
+            height: 50vh;
+         }
+            .flex-item {
+                background-color: lightblue;
+                padding: 20px;
+                margin: 10px;
+                border-radius: 5px;
+                flex: 1 1 30%;
+                text-align: center;
+            }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            grid-gap: 10px
+
+            
+        }
+        .grid-item1{grid-area: header; background-color: brown;}
+        .grid-item2{grid-area: footer; background-color: red;}
+        .grid-item3{grid-area: right; background-color: ghostwhite;}
+        .grid-item4{grid-area: menu; background-color: goldenrod;}
+        .grid-item5{grid-area: main; background-color: blue;}
+
+        @media (max-width: 600px)
+        {
+            .grid-container{
+                grid-template-areas: 
+                'header'
+                'main'
+                'right'
+                'footer'
+
+            }
+            
+
+        }
     </style>
 
     </head>
+    <div class="container">
+
 <!--1. in-line styling-->
 <body style="background-color: blue">
     <h1>Welcome to Brian Codes</h1>
@@ -95,5 +168,18 @@
         <button type="submit">Register</button>
         <button type="button" onclick="window.location.reload();">Cancel</button>
     </form>
+    <div class="flex-container">
+<div class ="flex-item"> readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </div>
+<div class ="flex-item"> readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </div>
+<div class ="flex-item"> readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </div>
+<div class ="flex-item"> readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </div>
+</div>
+
+<div class ="grid-container">
+    <div class ="grid-item"> readable content of a page when looking at its layout. The point of
+using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes </div>
+    <div class ="grid-item"> readable content of a page when looking at its layout. The point of                        
+
+</div>
 </body>
 </html>
