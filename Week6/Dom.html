@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Example</title>
+</head>
+<body>
+    <h1 id="main-title">Welcome to the DOM Example</h1>
+    <p id="p-main">This is a sample paragraph.</p>
+    <p class="info">This is a sample paragraph added to the DOM.html file.</p>
+    <p class="info">This is another sample paragraph added to the DOM.html file.</p>
+    
+    <script>
+        // selecting elements
+        const mainTitle = document.getElementById("main-title");
+        console.log(mainTitle);
+        const paragraphs = document.getElementsByClassName("info");
+        console.log(paragraphs);
+        const allParagraphs = document.querySelectorAll("p");
+        console.log(allParagraphs);
+    </script>
+</body>
+</html>

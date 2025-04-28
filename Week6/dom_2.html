@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Example</title>
+    <style>
+        body{
+            background-color: lightgray;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: blue;
+            font-size: 30px;
+            text-align: center;
+        }
+        p {
+            color: red;
+            font-size: 20px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            .list-item {
+                color: green;
+                font-size: 18px;
+            }
+        }
+        </style>
+        </head>
+<body>
+    <h1>My Shoopping List</h1>
+    <div id="container">
+        <p id="p-main">This is a sample paragraph.</p>
+        <p class="info">This is a sample paragraph added to the DOM.html file.</p>
+        <p class="info">This is another sample paragraph added to the DOM.html file.</p>
+        </div>
+
+        <script>
+        // selecting elements
+        const listCont = document.getElementById("container");
+        //create paragraph
+        const introParagraph = document.createElement("p");
+        introParagraph.textContent = "This is a sample paragraph added to the DOM.html file.";
+        introParagraph.classList.add("info");
+        listCont.appendChild(introParagraph);
+
+        //Create a list
+        const shoppintList = document.createElement("ul");
+        
+        for (let x=1; x<=5; x++){
+            const listItem = document.createElement("li");
+            listItem.textContent = "Item " + x;
+            shoppintList.appendChild(listItem);
+            listItem.classList.add("info");
+        }
+        listCont.appendChild(shoppintList);
+
+        //2.Inserting another paragraph at the top
+        const topNote = document.createElement("p");
+        topNote.textContent = "This is a sample paragraph added to the DOM.html file.";
+        listCont.prepend(topNote);
+
+        //3.Removing an element
+        const tenthItem = shoppintList.querySelector("li:nth-child(10)");
+        //4. Modifying classes
+        const paragraphs = document.getElementsByClassName("info");
+        for (let i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].classList.add("highlight");
+        }
+        </script>
+</html>
