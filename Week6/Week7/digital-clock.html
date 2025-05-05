@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Digital Clock</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #222;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .clock {
+            font-size: 5vw;
+            padding: 20px 40px;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            background-color: #333;
+            box-shadow: 0 0 20px #0ff;
+            user-select: none;
+            margin-bottom: 20px;
+        }
+        button {
+            font-size: 1.5vw;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0ff;
+            color: #222;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0cc;
+        }
+        @media (max-width: 600px) {
+            .clock {
+                font-size: 10vw;
+                padding: 15px 30px;
+            }
+            button {
+                font-size: 4vw;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock" id="clock">00:00:00</div>
+    <button id="toggleFormatBtn">Switch to 12-hour format</button>
+    <button id="resetBtn">Reset Clock</button>
+
+    <script>
+        let is24Hour = true;
+        let timerId;
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            let ampm = '';
+
+            if (!is24Hour) {
+                ampm = hours >= 12 ? ' PM' : ' AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+            }
+
+            const hoursStr = String(hours).padStart(2, '0');
+            const timeString = `${hoursStr}:${minutes}:${seconds}${ampm}`;
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        function updateMinutesAndSeconds() {
+            const now = new Date();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const clock = document.getElementById('clock');
+            let currentText = clock.textContent;
+            // Extract hours and am/pm if present
+            let hoursPart = currentText.split(':')[0];
+            let ampm = '';
+            if (currentText.length > 8) {
+                ampm = currentText.slice(-3);
+                hoursPart = currentText.slice(0, 2);
+            }
+            clock.textContent = `${hoursPart}:${minutes}:${seconds}${ampm}`;
+        }
+
+        function toggleFormat() {
+            is24Hour = !is24Hour;
+            const btn = document.getElementById('toggleFormatBtn');
+            btn.textContent = is24Hour ? 'Switch to 12-hour format' : 'Switch to 24-hour format';
+            updateClock();
+            updateStatus();
+        }
+
+        function resetClock() {
+            stopClock();
+            is24Hour = true;
+            document.getElementById('toggleFormatBtn').textContent = 'Switch to 12-hour format';
+            updateClock();
+            startClock();
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const status = is24Hour ? '24-hour format' : '12-hour format';
+            const statusElement = document.getElementById('status');
+            if (statusElement) {
+                statusElement.textContent = `Current format: ${status}`;
+            } else {
+                const newStatus = document.createElement('div');
+                newStatus.id = 'status';
+                newStatus.style.marginTop = '10px';
+                newStatus.style.color = '#0ff';
+                newStatus.style.fontSize = '1.2vw';
+                newStatus.textContent = `Current format: ${status}`;
+                document.body.appendChild(newStatus);
+            }
+        }
+
+        function startClock(interval = 1000) {
+            if (timerId) clearInterval(timerId);
+            timerId = setInterval(updateClock, interval);
+        }
+
+        function stopClock() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+            }
+        }
+
+        document.getElementById('toggleFormatBtn').addEventListener('click', toggleFormat);
+        document.getElementById('resetBtn').addEventListener('click', resetClock);
+
+        // Add event listeners for additional interactivity
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopClock();
+            } else {
+                startClock();
+            }
+        });
+
+        // Example: Reset clock on double click of the clock display
+        document.getElementById('clock').addEventListener('dblclick', resetClock);
+
+        timerId = setInterval(updateClock, 1000);
+        updateClock(); // initial call to display immediately
+        updateStatus();
+        //start initially
+        
+    </script>
+</body>
+</html>

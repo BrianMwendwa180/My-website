@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checklist Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: fixed;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            max-height: 50vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        li {
+            background: #eee;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            word-wrap: break-word;
+            width: 100%;
+        }
+        li.completed label {
+            text-decoration: line-through;
+            color: #888;
+        }
+        label {
+            flex-grow: 1;
+            cursor: pointer;
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+        }
+        label input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        li button {
+            background-color: #dc3545;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        li button:hover {
+            background-color: #c82333;
+        }
+        #taskCounters {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Task Checklist</h1>
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Add new task..." autocomplete="off" />
+            <button type="submit">Add</button>
+            <button type="button" id="clearTasksBtn">Clear</button>
+        </form>
+        <div id="taskCounters">
+            Total Tasks: <span id="totalTasks">0</span> | Completed: <span id="completedTasks">0</span>
+        </div>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+        const totalTasksSpan = document.getElementById('totalTasks');
+        const completedTasksSpan = document.getElementById('completedTasks');
+
+        let tasks = [];
+        let taskIdCounter = 0;
+
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            const savedTasks = localStorage.getItem('tasks');
+            if (savedTasks) {
+                tasks = JSON.parse(savedTasks);
+                tasks.forEach(task => {
+                    createTaskElement(task.id, task.text, task.completed);
+                    if (task.id >= taskIdCounter) {
+                        taskIdCounter = task.id + 1;
+                    }
+                });
+                updateCounters();
+            }
+        }
+
+        function createTaskElement(id, taskText, completed = false) {
+            const li = document.createElement('li');
+            li.dataset.id = id;
+            if (completed) {
+                li.classList.add('completed');
+            }
+
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = completed;
+            checkbox.addEventListener('change', () => {
+                li.classList.toggle('completed');
+                updateTaskStatus(id, checkbox.checked);
+                updateCounters();
+            });
+
+            label.appendChild(checkbox);
+            label.appendChild(document.createTextNode(taskText));
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.addEventListener('click', () => {
+                taskList.removeChild(li);
+                removeTask(id);
+                updateCounters();
+            });
+
+            li.appendChild(label);
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+        }
+
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
+            if (tasks.some(t => t.text === taskText)) {
+                alert('Task already exists!');
+                return;
+            }
+            const id = taskIdCounter++;
+            tasks.push({ id: id, text: taskText, completed: false });
+            createTaskElement(id, taskText);
+            saveTasks();
+            updateCounters();
+            taskInput.value = '';
+            taskInput.focus();
+        }
+
+        function updateTaskStatus(id, completed) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = completed;
+                saveTasks();
+            }
+        }
+
+        function removeTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            saveTasks();
+        }
+
+        function updateCounters() {
+            totalTasksSpan.textContent = tasks.length;
+            completedTasksSpan.textContent = tasks.filter(t => t.completed).length;
+        }
+
+        document.getElementById('taskForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            addTask();
+        });
+
+        loadTasks();
+
+        const clearTasksBtn = document.getElementById('clearTasksBtn');
+
+        function clearTasks() {
+            if (!confirm('Are you sure you want to clear all tasks?')) return;
+            tasks = [];
+            while (taskList.firstChild) {
+                taskList.removeChild(taskList.firstChild);
+            }
+            saveTasks();
+            updateCounters();
+            taskInput.focus();
+        }
+
+        clearTasksBtn.addEventListener('click', clearTasks);
+    </script>
+</body>
+</html>

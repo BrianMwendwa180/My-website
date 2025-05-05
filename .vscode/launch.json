@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open dom_2.html",
-            "file": "/home/brian/My-website/Week6/dom_2.html"
+            "file": "/home/brian/My-website/Week6/Week7/digital-clock.html"
         }
     ]
 }
